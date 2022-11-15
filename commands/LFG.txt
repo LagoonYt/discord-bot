@@ -1,0 +1,142 @@
+// import DiscordJS, { Interaction, MessageActionRow, MessageButton, MessageComponentInteraction, MessageEmbed } from "discord.js";
+// import { ICommand } from "wokcommands";
+
+// export default {
+
+//     category: 'testing',
+//     description: 'Creates a looking for group request!',
+//     slash: true,
+//     testOnly: true,
+//     options: [
+//         {
+//             name: 'game',
+//             description: 'The game you are looking to play!',
+//             required: true,
+//             type: DiscordJS.Constants.ApplicationCommandOptionTypes.STRING,
+//         },
+//         {
+//             name: 'time',
+//             description: 'The time you are looking to play!',
+//             required: true,
+//             type: DiscordJS.Constants.ApplicationCommandOptionTypes.STRING,
+//         },
+//         {
+//             name: 'rank',
+//             description: 'Your current rank!',
+//             required: true,
+//             type: DiscordJS.Constants.ApplicationCommandOptionTypes.STRING,
+//         },        
+//         {
+//             name: 'in-game-info',
+//             description: 'Your in game name and code!',
+//             required: true,
+//             type: DiscordJS.Constants.ApplicationCommandOptionTypes.STRING,
+//         },      
+//         {
+//             name: 'server',
+//             description: 'The server you play on!',
+//             required: true,
+//             type: DiscordJS.Constants.ApplicationCommandOptionTypes.STRING,
+//         },  
+//         {   
+//         name: 'players',
+//             description: 'How many players are you looking for?',
+//             required: true,
+//             type: DiscordJS.Constants.ApplicationCommandOptionTypes.NUMBER,
+//         },           
+//         {   
+//             name: 'extra',
+//             description: 'Anything extra you would like to add!',
+//             required: false,
+//             type: DiscordJS.Constants.ApplicationCommandOptionTypes.STRING,
+//         },
+// ],
+
+//     callback: async ({interaction:msgInt,channel}) =>{
+//         const row = new MessageActionRow()
+//         .addComponents(
+//             new MessageButton()
+//             .setCustomId('Accept')
+//             .setEmoji('👍')
+//             .setLabel('Accept')
+//             .setStyle('SUCCESS')
+//         )
+//         .addComponents(
+//             new MessageButton()
+//             .setCustomId('Tenative')
+//             .setEmoji('🤷‍♂️')
+//             .setLabel('Tenative')
+//             .setStyle('PRIMARY')
+//         )
+        
+//         const game = msgInt.options.getString('game')
+//         const time = msgInt.options.getString('time')
+//         const rank = msgInt.options.getString('rank')
+//         const igi = msgInt.options.getString('in-game-info')
+//         const server = msgInt.options.getString('server')
+//         const players = msgInt.options.getNumber('players')
+//         const extra = msgInt.options.getString('extra')
+//         const desc = `${msgInt.user.username} is looking to play ${game} at ${time}!
+    
+//         **Extra Info:**
+//         **Rank:** ${rank}
+//         **In Game Name:** ${igi}
+//         **Server:** ${server}
+//         **Players:** ${players}
+//         **Extra:** ${extra}
+
+//         `
+//         const embed = new MessageEmbed()
+//         .setTitle(`Looking for ${game} group!`)
+//         .setDescription(`${desc}`)
+//         .setColor('#ff0000')
+//         .setFooter(`${msgInt.user.tag}`)
+
+//         const newEmbed = await msgInt.reply({
+//             embeds: [embed],
+//             components: [row],
+            
+//         })
+
+
+
+
+//         const collector = channel.createMessageComponentCollector({
+//             max: 10,
+//         })
+
+//         collector.on('collect', (i: MessageComponentInteraction) => {
+//             const newembed = newEmbed.embeds[0]
+//             newembed.setDescription(`${desc}`)
+           
+//             newEmbed.edit({
+//                 embeds: [newembed],
+//             })
+//             i.reply({
+//                 content: `Sorry ${i.user.username} we are still working on this!`,
+//                 ephemeral: true
+//             })
+            
+//         })
+//         // collector.on('collect', (i: MessageComponentInteraction) => {
+//         //     console.log(`Button with id: ${i.customId} was pressed by ${i.user.username}`)
+//         //     i.reply({
+//         //         content: `Button with id: ${i.customId} was pressed by ${i.user.username}`,
+//         //         ephemeral: true
+//         //     })
+//         // })
+
+//         collector.on('end', async (collection) => {
+//             collection.forEach((click) => {
+//                 console.log(click.user.tag, click.customId)
+                
+//             })
+//         })
+
+
+        
+//     },
+
+
+// } as ICommand
+// //say hello
